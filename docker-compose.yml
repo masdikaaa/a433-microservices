@@ -1,0 +1,33 @@
+services:
+  # =====================
+  # Service MongoDB
+  # =====================
+  item-db:
+    image: mongo:${MONGO_VERSION}     # Versi Mongo sesuai kriteria (3)
+    volumes:
+      - app-db:/data/db               # Simpan data Mongo di volume app-db
+    restart: unless-stopped           # Restart otomatis jika mati
+    # Pastikan DB siap sebelum item-app jalan
+    healthcheck:
+      test: ["CMD", "mongo", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =====================
+  # Service item-app
+  # =====================
+  item-app:
+    image: "${DOCKERHUB_USERNAME}/${ITEM_APP_LOCAL}:${ITEM_APP_TAG}"
+    ports:
+      - "80:8080"                     # Port host 80 -> port 8080 container
+    depends_on:
+      item-db:
+        condition: service_healthy    # Jalan hanya setelah DB sehat
+    restart: unless-stopped           # Restart otomatis jika mati
+
+# =====================
+# Volume untuk database
+# =====================
+volumes:
+  app-db:
