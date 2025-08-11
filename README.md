@@ -56,40 +56,7 @@ Proyek ini merupakan submission **Proyek Pertama: Deploy Item App dengan Docker 
 
 ---
 
-## 🚀 Menjalankan di Lokal
-
-> **Penting:** `docker-compose.yml` menggunakan **image** (bukan `build:`), jadi kamu **harus build & tag/push image dulu** supaya Compose bisa menarik image yang benar.
-
-**Opsi A — Rekomendasi (build & push dulu):**
-
-```bash
-chmod +x build_push_image.sh
-./build_push_image.sh        # build lokal → tag → push ke Docker Hub
-
-docker compose up -d         # server/lokal akan pull image dari Docker Hub
-```
-
-**Opsi B — Tanpa push (hanya lokal):**
-
-```bash
-# build image lokal dengan tag yang sama seperti di compose
-chmod +x build_push_image.sh
-source .env
-
-docker build -t "${ITEM_APP_LOCAL}:${ITEM_APP_TAG}" .
-# tag ke format yang dipakai di compose
-docker tag "${ITEM_APP_LOCAL}:${ITEM_APP_TAG}" \
-  "${DOCKERHUB_USERNAME}/${ITEM_APP_LOCAL}:${ITEM_APP_TAG}"
-
-# jalankan tanpa perlu pull
-docker compose up -d
-```
-
-Akses aplikasi di `http://localhost`.
-
----
-
-## 📦 Build & Push Image ke Docker Hub
+## 🚀 Build Image & Push ke Docker Hub (Wajib Sebelum Deploy)
 
 1. Login ke Docker Hub:
 
@@ -102,7 +69,7 @@ Akses aplikasi di `http://localhost`.
    chmod +x build_push_image.sh
    ./build_push_image.sh
    ```
-3. Lihat image di Docker Hub:
+3. Pastikan image tersedia di:
 
    ```
    https://hub.docker.com/r/andikaferdialvianto/item-app/tags
@@ -110,9 +77,25 @@ Akses aplikasi di `http://localhost`.
 
 ---
 
+## 💻 Menjalankan di Lokal (Build Sekaligus Menjalankan)
+
+```bash
+docker compose up -d --build
+```
+
+Perintah ini akan membangun image dari Dockerfile dan langsung menjalankan container.
+Akses aplikasi di `http://localhost`.
+
+---
+
 ## ☁️ Deploy ke Server
 
-1. **Pastikan sudah menjalankan** `build_push_image.sh` di lokal/dev machine.
+1. **Build & push image** di lokal:
+
+   ```bash
+   chmod +x build_push_image.sh
+   ./build_push_image.sh
+   ```
 2. **Login** di server:
 
    ```bash
