@@ -1,6 +1,6 @@
 # 📦 A433 - Microservices Item App
 
-**Tech Stack:** ![Node.js](https://img.shields.io/badge/Node.js-14-green?logo=node.js) ![MongoDB](https://img.shields.io/badge/MongoDB-3-blue?logo=mongodb) ![Docker](https://img.shields.io/badge/Docker-Engine-blue?logo=docker) ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Orchestration-lightblue?logo=docker) ![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Registry-blue?logo=docker)
+![Node.js](https://img.shields.io/badge/Node.js-14-green?logo=node.js) ![MongoDB](https://img.shields.io/badge/MongoDB-3-blue?logo=mongodb) ![Docker](https://img.shields.io/badge/Docker-Engine-blue?logo=docker) ![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Orchestration-lightblue?logo=docker) ![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Registry-blue?logo=docker)
 
 Proyek ini merupakan submission **Proyek Pertama: Deploy Item App dengan Docker Compose** dari kelas Dicoding. Aplikasi ini terdiri dari service **MongoDB** dan service **Item App** berbasis Node.js, yang dijalankan menggunakan **Docker Compose**.
 
